@@ -4,8 +4,13 @@
  IMPLEMENTED BY:    Garry Cabrera
  **********************************************************************/
 
-
+#include "CabreraNevarez-assn4-common.h"
 #include "Cabrera-assn4-funcs.h"
+#include <ctime>
+#include <iomanip>
+#include <iostream>
+
+using namespace std;
 
 /**********************************************************************************
  FUNCTION:          InsertionSort
@@ -18,7 +23,30 @@
  **********************************************************************************/
 int insertionSort (int list[]) {
     
-    return 0;
+    int currentIdx,                 // current index in loop
+    temp;
+    int startTime,                  // starting timer value
+    endTime;                        // ending timer value
+    
+    
+    startTime = clock();
+    
+    for (int sortedTopIdx = 1; sortedTopIdx < LIST_SIZE; sortedTopIdx++) {
+        
+        currentIdx = sortedTopIdx;
+        
+        while (currentIdx > 0 && list[currentIdx] < list[currentIdx - 1]) {
+            temp = list[currentIdx];
+            list[currentIdx] = list[currentIdx - 1];
+            list[currentIdx - 1] = temp;
+            currentIdx--;
+        }
+        
+    }// end for loop
+    
+    endTime = clock();
+    
+    return (endTime - startTime);
 }
 
 
@@ -62,7 +90,23 @@ void mergeSortList (int subList[]) {
     Returns:        true if array is sorted correctly, false if not
  **********************************************************************************/
 bool validateSort (int list[]) {
-    return false;
+    bool isSorted = false;          // true if list is sorted
+    int currIdx = 0;                // current index
+    
+    // loop while the list is sorted and within the list size
+    do {
+        
+        if (list[currIdx] < list[currIdx + 1]) {
+            isSorted = true;
+            currIdx++;
+        }
+        else
+            isSorted = false;
+    
+        std::cout << "In index "<<currIdx << " the value is: "<<list[currIdx]<<std::endl;
+    } while (isSorted && currIdx < LIST_SIZE - 1);
+    
+    return isSorted;
 }
 
 /**********************************************************************************
@@ -75,5 +119,5 @@ bool validateSort (int list[]) {
  OUTPUT:            Averages for each sort
  **********************************************************************************/
 void displayAverages (int firstResults[], int secondResults[]) {
-    
+
 }

@@ -12,7 +12,7 @@
 // number of sorting functions
 const int NUM_SORT_FUNCS = 2;
 // max size of unsorted list of integers
-const int LIST_SIZE = 100000;
+const int LIST_SIZE = 10;
 // max value of random integer to insert into hash table
 const int MAX_INTEGER = 30000;
 // error code that will exit the program
@@ -22,7 +22,9 @@ const int EXIT_ERROR_CODE = 1;
 // an int array argument and returns an int
 typedef int (*funcPtrType)(int[]);
 
+/*
 // Array of pointers for the sorting prototypes
 const funcPtrType funcPtrArray[NUM_SORT_FUNCS] = {
     &mergeSort,
     &insertionSort};
+ */

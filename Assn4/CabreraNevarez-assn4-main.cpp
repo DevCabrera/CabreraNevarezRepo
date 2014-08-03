@@ -26,9 +26,8 @@ int main()
     int resultsIdx;                     // index where results will be stored in results arrays
     int list1[LIST_SIZE];               // first list array to be sorted
     int list2[LIST_SIZE];               // second list array to be sorted
-    int resultTime;                     // holds the time it took for a function to sort a list
     
-    
+
     resultsIdx = 0;
     
     // initial menu display and user input
@@ -50,17 +49,26 @@ int main()
         do
         {
             CreateUnsortedList(list1, list2);
+            
+            // *** TESTING THE INSERT SORT *** //
+            firstResults[resultsIdx] = insertionSort(list1);
+            secondResults[resultsIdx] = insertionSort(list2);
             // TODO: call first sort function using function pointers and add clock time to results array 1
             // TODO: call second sort function using function pointers and add clock time to results array 2
             
+            
             // verify that lists are sorted, if not exit the program
-            if (!validateSort(list1) && !validateSort(list2)) 
+            if (!validateSort(list1) && !validateSort(list2)) {
+                cout << "Lists are not sorted! Exiting program ...\n\n";
                 return EXIT_ERROR_CODE;
+            }
             
             sortsCount--;
+            resultsIdx++;
+            cout << "Sorts Validated\n";
         }while (sortsCount > 0);
         
-        displayAverages(list1, list2);
+        //displayAverages(list1, list2);
         
         // de-allocate the memory of the results arrays
         delete firstResults;
@@ -71,7 +79,7 @@ int main()
         getInput(firstSort, secondSort, sortsCount);
         
     }// end main program while
-    
+
     return 0;
 }// end main
 
