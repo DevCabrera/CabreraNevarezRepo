@@ -47,38 +47,7 @@ int insertionSort (int list[]) {
     endTime = clock();
     
     return (endTime - startTime);
-}
-
-
-/**********************************************************************************
- FUNCTION:          MergeSort
- IMPLEMENTED BY:	Garry Cabrera
- DESCRIPTION:       Sorts an array of numbers using the Merge sort method
- INPUT:
-    Parameters:     list - unordered list array of numbers
- OUTPUT:            Displays total click times = “Merge sort time 777777…”
-    Return:         totalClockTicks - amount of time the algorithm has been running
- CALLS TO:          MergeSortSublist
- **********************************************************************************/
-int mergeSort (int list[]) {
-    
-    return 0;
-}
-
-/**********************************************************************************
- FUNCTION:          MergeSortSublist
- IMPLEMENTED BY:	Garry Cabrera
- DESCRIPTION:       Sorts a sublist that will be used in the merge algorithm
- INPUT:
-    Parameters:     list - unordered sub-list array of numbers
-                    lowIdx - lowest index value in the array
-                    highIdx - highest index value in the array
- OUTPUT:
-    Return:         list - ordered sublist of numbers
- **********************************************************************************/
-void mergeSortList (int subList[]) {
-    
-}
+}// end insertionSort
 
 /**********************************************************************************
  FUNCTION:          ValidateSort
@@ -103,11 +72,10 @@ bool validateSort (int list[]) {
         else
             isSorted = false;
     
-        std::cout << "In index "<<currIdx << " the value is: "<<list[currIdx]<<std::endl;
     } while (isSorted && currIdx < LIST_SIZE - 1);
     
     return isSorted;
-}
+}// end validateSort
 
 /**********************************************************************************
  FUNCTION:          DisplayAverages
@@ -120,4 +88,116 @@ bool validateSort (int list[]) {
  **********************************************************************************/
 void displayAverages (int firstResults[], int secondResults[]) {
 
-}
+}// end displayAverages
+
+/**********************************************************************************
+ FUNCTION:          MergeSort
+ IMPLEMENTED BY:	Garry Cabrera
+ DESCRIPTION:       Sorts an array of numbers using the Merge sort method
+ INPUT:
+ Parameters:     list - unordered list array of numbers
+ OUTPUT:            Displays total click times = “Merge sort time 777777…”
+ Return:         totalClockTicks - amount of time the algorithm has been running
+ CALLS TO:          MergeSortSublist
+ **********************************************************************************/
+int mergeSort (int list[]) {
+    
+    int startTime;                      // starting timer value
+    int endTime;                        // ending timer value
+    
+    startTime = clock();
+    mergeSortRecurs(list, 0, LIST_SIZE - 1);
+    endTime = clock();
+
+    return endTime - startTime;
+}// end mergeSort
+
+/**********************************************************************************
+ FUNCTION:          MergeSortSublist
+ IMPLEMENTED BY:	Garry Cabrera
+ DESCRIPTION:       Sorts a sublist that will be used in the merge algorithm
+ INPUT:
+    Parameters:     list - unordered sub-list array of numbers
+                    lowIdx - lowest index value in the array
+                    highIdx - highest index value in the array
+ OUTPUT:
+    Return:         list - ordered sublist of numbers
+ **********************************************************************************/
+void mergeSortRecurs (int list[], int lowIdx, int highIdx)
+{
+    int midIdx;                        // middle index
+    
+    if (lowIdx < highIdx)
+    {
+        midIdx = (lowIdx + highIdx) / 2;
+        mergeSortRecurs(list, lowIdx, midIdx);
+        mergeSortRecurs(list, midIdx + 1, highIdx);
+        
+        merge(list, lowIdx, midIdx, highIdx);
+    }
+    
+}// end mergeSortRecurs
+
+/**********************************************************************************
+ FUNCTION:          merge
+ IMPLEMENTED BY:	Garry Cabrera
+ DESCRIPTION:       Merges two ordered lists and combines them into a single ordered
+                    list.
+ INPUT:
+    Parameters:     list - array of numbers
+                    lowIdx - lowest index value in the array
+                    midIdx - middle index value in the array
+                    highIdx - highest index value in the array
+ OUTPUT:
+    Return:         list - ordered list of numbers
+ **********************************************************************************/
+void merge (int list[], int lowIdx, int midIdx, int highIdx)
+{
+    int leftIdx;                        // left most element
+    int rightIdx;                       // right most element
+    int tempPos;                        // used to swap the values
+    static int tempList[LIST_SIZE];     // temp list used to sort the array
+    
+    leftIdx = lowIdx;
+    rightIdx = midIdx + 1;
+    tempPos = lowIdx;
+    
+    // copy values from the current part of array being merged
+    for (int i = lowIdx; i <= highIdx; i++)
+        tempList[i] = list[i];
+    
+    while ((leftIdx <= midIdx) && (rightIdx <= highIdx))
+    {
+        if (tempList[leftIdx] <= tempList[rightIdx])
+        {
+            list[tempPos] = tempList[leftIdx];
+            leftIdx++;
+        }
+        else
+        {
+            list[tempPos] = tempList[rightIdx];
+            rightIdx++;
+        }
+        
+        tempPos++;
+    }// end while
+    
+    // loop while additional elements are on the left side
+    while (leftIdx <= midIdx) {
+        list[tempPos] = tempList[leftIdx];
+        tempPos++;
+        leftIdx++;
+    }// end while
+    
+    // loop while additional elements are on the right side
+    while (rightIdx <= highIdx) {
+        list[tempPos] = tempList[rightIdx];
+        tempPos++;
+        rightIdx++;
+    }// end while
+
+}// end merge
+
+
+
+

@@ -50,13 +50,18 @@ int main()
         {
             CreateUnsortedList(list1, list2);
             
-            // *** TESTING THE INSERT SORT *** //
-            firstResults[resultsIdx] = insertionSort(list1);
-            secondResults[resultsIdx] = insertionSort(list2);
+            // display unsorted list
+            for (int i = 0; i < LIST_SIZE; i++) {
+                cout << list1[i] << endl;
+            }
+            
             // TODO: call first sort function using function pointers and add clock time to results array 1
             // TODO: call second sort function using function pointers and add clock time to results array 2
             
-            
+            cout << "\n\nsorted list?\n\n";
+            for (int i = 0; i < LIST_SIZE; i++) {
+                cout << list1[i] << endl;
+            }
             // verify that lists are sorted, if not exit the program
             if (!validateSort(list1) && !validateSort(list2)) {
                 cout << "Lists are not sorted! Exiting program ...\n\n";

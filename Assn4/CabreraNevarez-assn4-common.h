@@ -4,8 +4,6 @@
                     variables needed for the overall program
  IMPLEMENTED BY:    Garry Cabrera and Juan Nevarez
  **********************************************************************/
-#include "Cabrera-assn4-funcs.h"
-#include "Nevarez-assn4-funcs.h"
 
 // Constants
 // TODO: CHANGE TO 4 ONCE OTHER 2 FUNCS ARE ADDED
