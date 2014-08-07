@@ -21,7 +21,8 @@ using namespace std;
  OUTPUT:            Displays total click times = “Insertion sort time 777777…”
     Return:         totalClockTicks - amount of time the algorithm has been running
  **********************************************************************************/
-int insertionSort (int list[]) {
+int insertionSort (int list[])
+{
     
     int currentIdx,                 // current index in loop
     temp;
@@ -58,7 +59,8 @@ int insertionSort (int list[]) {
  OUTPUT:
     Returns:        true if array is sorted correctly, false if not
  **********************************************************************************/
-bool validateSort (int list[]) {
+bool validateSort (int list[])
+{
     bool isSorted = false;          // true if list is sorted
     int currIdx = 0;                // current index
     
@@ -86,7 +88,8 @@ bool validateSort (int list[]) {
                     secondResult - array with results of times for second sort method
  OUTPUT:            Averages for each sort
  **********************************************************************************/
-void displayAverages (int firstResults[], int secondResults[]) {
+void displayAverages (int firstResults[], int secondResults[])
+{
 
 }// end displayAverages
 
@@ -198,6 +201,26 @@ void merge (int list[], int lowIdx, int midIdx, int highIdx)
 
 }// end merge
 
-
+int getFuncTypeIndex (char ch)
+{
+    int index;              // function pointer array index
+    
+    switch (ch)
+    {
+        case 'B':
+            index = BUBBLE;
+            break;
+        case 'I':
+            index = INSERTION;
+            break;
+        case 'M':
+            index = MERGE;
+            break;
+        case 'Q':
+            index = QUICK;
+            break;
+    }
+    return index;
+}// end getFuncTypeIndex
 
 

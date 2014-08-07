@@ -91,3 +91,6 @@ void getInput(char &firstSort, char &secondSort, int &repeat)
 	}	
 	
 }
+
+int bubbleSort(int list[]){return 0;}
+int quickSort(int list[]){return 0;}

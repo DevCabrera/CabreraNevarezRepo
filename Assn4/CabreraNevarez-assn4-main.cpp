@@ -15,6 +15,15 @@
 
 using namespace std;
 
+
+// Array of pointers for the sorting prototypes
+const funcPtrType funcPtrArray[NUM_SORT_FUNCS] = {
+    &bubbleSort,
+    &insertionSort,
+    &mergeSort,
+    &quickSort
+};
+
 int main()
 {
     funcPtrType funcPtr;                // pointer to sort function chosen by user
@@ -34,6 +43,9 @@ int main()
     displayMenu();
     getInput(firstSort, secondSort, sortsCount);
     
+    cout << getFuncTypeIndex(firstSort)<<endl;
+    cout << getFuncTypeIndex(secondSort)<<endl;
+    
     // loop while user doesn't choose EE to exit
     while (firstSort != 'E')
     {
@@ -50,29 +62,26 @@ int main()
         {
             CreateUnsortedList(list1, list2);
             
-            // display unsorted list
-            for (int i = 0; i < LIST_SIZE; i++) {
-                cout << list1[i] << endl;
-            }
+            // call first sort function
+            funcPtr = funcPtrArray[getFuncTypeIndex(firstSort)];
+            firstResults[resultsIdx] = funcPtr(list1);
+
+            // call second sort function
+            funcPtr = funcPtrArray[getFuncTypeIndex(secondSort)];
+            secondResults[resultsIdx] = funcPtr(list2);
             
-            // TODO: call first sort function using function pointers and add clock time to results array 1
-            // TODO: call second sort function using function pointers and add clock time to results array 2
-            
-            cout << "\n\nsorted list?\n\n";
-            for (int i = 0; i < LIST_SIZE; i++) {
-                cout << list1[i] << endl;
-            }
             // verify that lists are sorted, if not exit the program
             if (!validateSort(list1) && !validateSort(list2)) {
                 cout << "Lists are not sorted! Exiting program ...\n\n";
                 return EXIT_ERROR_CODE;
             }
             
-            sortsCount--;
+            sortsCount--;       //****** DON'T USE THIS FOR THE INDEX FOR THE RESULTS ARRAY
             resultsIdx++;
             cout << "Sorts Validated\n";
         }while (sortsCount > 0);
         
+
         //displayAverages(list1, list2);
         
         // de-allocate the memory of the results arrays
