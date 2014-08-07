@@ -26,8 +26,8 @@ enum sorts {BUBBLE, INSERTION, MERGE, QUICK};
 
 // array of strings describing the sort type
 const std::string sortsStr[NUM_SORT_FUNCS] = {
-    "Bubble sort",
-    "Insertion sort",
-    "Merge sort",
-    "Quick sort"
+    "Bubble Sort",
+    "Insertion Sort",
+    "Merge Sort",
+    "Quick Sort"
 };

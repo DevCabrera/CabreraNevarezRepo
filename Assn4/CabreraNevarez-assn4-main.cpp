@@ -28,6 +28,7 @@ const funcPtrType funcPtrArray[NUM_SORT_FUNCS] = {
 int main()
 {
     funcPtrType funcPtr;                // pointer to sort function chosen by user
+    string ch;                          // used to pause the screen
     int *firstResults;                  // first results array
     int *secondResults;                 // second results array
     char firstSort;                     // first sort function user will choose
@@ -36,9 +37,8 @@ int main()
     int resultsIdx;                     // index where results will be stored in results arrays
     int list1[LIST_SIZE];               // first list array to be sorted
     int list2[LIST_SIZE];               // second list array to be sorted
-    
-
-    resultsIdx = 0;
+    int firstSortType;                  // first sort enum value being used
+    int secondSortType;                 // second sort enum value being used
     
     // initial menu display and user input
     displayMenu();
@@ -48,6 +48,11 @@ int main()
     // loop while user doesn't choose EE to exit
     while (firstSort != 'E')
     {
+        resultsIdx = 0;
+
+        firstSortType = getFuncTypeIndex(firstSort);
+        secondSortType = getFuncTypeIndex(secondSort);
+        
         // initialize the results arrays
         firstResults = new int[sortsCount];
         secondResults = new int[sortsCount];
@@ -61,33 +66,44 @@ int main()
         {
             CreateUnsortedList(list1, list2);
             
+            cout << "\nStarting sort #" << resultsIdx + 1 << "...\n";
             // call first sort function
-            funcPtr = funcPtrArray[getFuncTypeIndex(firstSort)];
+            funcPtr = funcPtrArray[firstSortType];
             firstResults[resultsIdx] = funcPtr(list1);
 
             // call second sort function
-            funcPtr = funcPtrArray[getFuncTypeIndex(secondSort)];
+            funcPtr = funcPtrArray[secondSortType];
             secondResults[resultsIdx] = funcPtr(list2);
             
-
             // verify that lists are sorted, if not exit the program
             if (!validateSort(list1) && !validateSort(list2)) {
                 cout << "Lists are not sorted! Exiting program ...\n\n";
                 return EXIT_ERROR_CODE;
             }
             
-            sortsCount--;       //****** DON'T USE THIS FOR THE INDEX FOR THE RESULTS ARRAY
+            sortsCount--;
             resultsIdx++;
-            cout << "Sorts Validated\n";
+            cout << setw(25) << right << "Sorts Validated\n";
+            
         }while (sortsCount > 0);
 
-        //displayAverages(list1, list2);
-        
+        // display the result averages
+        cout << showpoint << fixed << setprecision(1);
+        cout << "\nSORTING RESULTS\n";
+        cout << "---------------\n";
+        cout << setw(20) << right << sortsStr[firstSortType] << " "
+             << getAvg(firstResults, resultsIdx) << " clock ticks on average\n";
+        cout << setw(20) << right << sortsStr[secondSortType] << " "
+             << getAvg(secondResults, resultsIdx) << " clock ticks on average\n";
+
         // de-allocate the memory of the results arrays
         delete []firstResults;
         delete []secondResults;
         
-        // display menu options again
+        // display menu options again and get input
+        cout << "\nPress any key to continue . . .\n\n";
+        cin.ignore();
+        getline(cin, ch);
         displayMenu();
         getInput(firstSort, secondSort, sortsCount);
         

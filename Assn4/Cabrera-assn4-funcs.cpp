@@ -22,14 +22,14 @@ using namespace std;
     Return:         totalClockTicks - amount of time the algorithm has been running
  **********************************************************************************/
 int insertionSort (int list[])
-{
-    
-    int remainTopIdx;
-    int lastIdx;
-    int currentIdx;
-    int inserValue;
+{    
+    int remainTopIdx;               // top index
+    int lastIdx;                    // last index
+    int currentIdx;                 // current index in the loop
+    int inserValue;                 // value to be swaped
     int startTime,                  // starting timer value
-    endTime;                        // ending timer value
+    endTime,                        // ending timer value
+    elapsedTime;                    // total time sorting
     
     remainTopIdx = 1;
     lastIdx = LIST_SIZE - 1;
@@ -51,7 +51,11 @@ int insertionSort (int list[])
     
     endTime = clock();
     
-    return (endTime - startTime);
+    elapsedTime = endTime - startTime;
+    
+    cout << setw(19) << right << sortsStr[INSERTION] << " time " << elapsedTime << endl;
+    
+    return elapsedTime;
 }// end insertionSort
 
 /**********************************************************************************
@@ -93,16 +97,22 @@ bool validateSort (int list[])
     Return:         totalClockTicks - amount of time the algorithm has been running
  CALLS TO:          mergeSortRecurs
  **********************************************************************************/
-int mergeSort (int list[]) {
+int mergeSort (int list[])
+{
     
     int startTime;                      // starting timer value
     int endTime;                        // ending timer value
+    int elapsedTime;                    // total time sorting
     
     startTime = clock();
     mergeSortRecurs(list, 0, LIST_SIZE - 1);
     endTime = clock();
 
-    return endTime - startTime;
+    elapsedTime = endTime -startTime;
+    
+    cout << setw(19) << right << sortsStr[MERGE] << " time " << elapsedTime << endl;
+
+    return elapsedTime;
 }// end mergeSort
 
 /**********************************************************************************
@@ -224,18 +234,24 @@ int getFuncTypeIndex (char ch)
 }// end getFuncTypeIndex
 
 /**********************************************************************************
- FUNCTION:          DisplayAverages
+ FUNCTION:          getAvg
  IMPLEMENTED BY:	Garry Cabrera
- DESCRIPTION:       Displays the average sort times for each sort method
+ DESCRIPTION:       Returns the average clock ticks
  INPUT:
-    Parameters:     firstResult - array with results of times for first sort method
-                    secondResult - array with results of times for second sort method
-                    sType1 - the first sort type used
-                    sType2 - the second sort type used
- OUTPUT:            Averages for each sort
+    Parameters:     list - array with results
+                    size - size of the results array
+ OUTPUT:
+    Return:         average clock ticks
  **********************************************************************************/
-void displayAverages (int firstResults[], int secondResults[], sorts sType1, sorts sType2)
+double getAvg (int list[], int size)
 {
+    double avg;                 // average clock ticks
+    int idx;                    // loop index
     
-}// end displayAverages
+    for (idx = 0; idx < size; idx++) {
+        avg += (double)list[idx];
+    }
+    
+    return (avg / (double)size);
+}
 
