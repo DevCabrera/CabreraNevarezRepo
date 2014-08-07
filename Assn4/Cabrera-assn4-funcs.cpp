@@ -24,26 +24,30 @@ using namespace std;
 int insertionSort (int list[])
 {
     
-    int currentIdx,                 // current index in loop
-    temp;
+    int remainTopIdx;
+    int lastIdx;
+    int currentIdx;
+    int inserValue;
     int startTime,                  // starting timer value
     endTime;                        // ending timer value
     
+    remainTopIdx = 1;
+    lastIdx = LIST_SIZE - 1;
     
     startTime = clock();
     
-    for (int sortedTopIdx = 1; sortedTopIdx < LIST_SIZE; sortedTopIdx++) {
+    while (remainTopIdx <= lastIdx) {
+        inserValue = list[remainTopIdx];
+        currentIdx = remainTopIdx - 1;
         
-        currentIdx = sortedTopIdx;
-        
-        while (currentIdx > 0 && list[currentIdx] < list[currentIdx - 1]) {
-            temp = list[currentIdx];
-            list[currentIdx] = list[currentIdx - 1];
-            list[currentIdx - 1] = temp;
+        while ((currentIdx >= 0) && (inserValue < list[currentIdx])) {
+            list[currentIdx + 1] = list[currentIdx];
             currentIdx--;
         }
         
-    }// end for loop
+        list[currentIdx + 1] = inserValue;
+        remainTopIdx++;
+    }
     
     endTime = clock();
     
@@ -67,7 +71,7 @@ bool validateSort (int list[])
     // loop while the list is sorted and within the list size
     do {
         
-        if (list[currIdx] < list[currIdx + 1]) {
+        if (list[currIdx] <= list[currIdx + 1]) {
             isSorted = true;
             currIdx++;
         }
@@ -80,28 +84,14 @@ bool validateSort (int list[])
 }// end validateSort
 
 /**********************************************************************************
- FUNCTION:          DisplayAverages
- IMPLEMENTED BY:	Garry Cabrera
- DESCRIPTION:       Displays the average sort times for each sort method
- INPUT:
-    Parameters:     firstResult - array with results of times for first sort method
-                    secondResult - array with results of times for second sort method
- OUTPUT:            Averages for each sort
- **********************************************************************************/
-void displayAverages (int firstResults[], int secondResults[])
-{
-
-}// end displayAverages
-
-/**********************************************************************************
- FUNCTION:          MergeSort
+ FUNCTION:          mergeSort
  IMPLEMENTED BY:	Garry Cabrera
  DESCRIPTION:       Sorts an array of numbers using the Merge sort method
  INPUT:
- Parameters:     list - unordered list array of numbers
+    Parameters:     list - unordered list array of numbers
  OUTPUT:            Displays total click times = “Merge sort time 777777…”
- Return:         totalClockTicks - amount of time the algorithm has been running
- CALLS TO:          MergeSortSublist
+    Return:         totalClockTicks - amount of time the algorithm has been running
+ CALLS TO:          mergeSortRecurs
  **********************************************************************************/
 int mergeSort (int list[]) {
     
@@ -125,6 +115,7 @@ int mergeSort (int list[]) {
                     highIdx - highest index value in the array
  OUTPUT:
     Return:         list - ordered sublist of numbers
+ CALLS TO:          merge
  **********************************************************************************/
 void mergeSortRecurs (int list[], int lowIdx, int highIdx)
 {
@@ -201,9 +192,18 @@ void merge (int list[], int lowIdx, int midIdx, int highIdx)
 
 }// end merge
 
+/**********************************************************************************
+ FUNCTION:          getFuncTypeIndex
+ IMPLEMENTED BY:	Garry Cabrera
+ DESCRIPTION:       Returns the enumerated sort function entered by user
+ INPUT:
+    Parameters:     ch - sort function user entered
+ OUTPUT:
+    Return:         index - enumerated type index
+ **********************************************************************************/
 int getFuncTypeIndex (char ch)
 {
-    int index;              // function pointer array index
+    int index = 0;          // function pointer array index
     
     switch (ch)
     {
@@ -223,4 +223,19 @@ int getFuncTypeIndex (char ch)
     return index;
 }// end getFuncTypeIndex
 
+/**********************************************************************************
+ FUNCTION:          DisplayAverages
+ IMPLEMENTED BY:	Garry Cabrera
+ DESCRIPTION:       Displays the average sort times for each sort method
+ INPUT:
+    Parameters:     firstResult - array with results of times for first sort method
+                    secondResult - array with results of times for second sort method
+                    sType1 - the first sort type used
+                    sType2 - the second sort type used
+ OUTPUT:            Averages for each sort
+ **********************************************************************************/
+void displayAverages (int firstResults[], int secondResults[], sorts sType1, sorts sType2)
+{
+    
+}// end displayAverages
 

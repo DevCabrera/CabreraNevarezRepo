@@ -93,4 +93,74 @@ void getInput(char &firstSort, char &secondSort, int &repeat)
 }
 
 int bubbleSort(int list[]){return 0;}
-int quickSort(int list[]){return 0;}
+
+
+int quickSort(int list[])
+{
+	int startTime,
+    elapsedTime,
+    endTime;
+	
+	startTime = clock()	;
+	
+	quickRecurs (list, 0, LIST_SIZE-1);
+	
+	endTime = clock();
+	
+	elapsedTime = endTime - startTime;
+	
+	return elapsedTime;
+}
+void quickRecurs(int list[], int lowIdx, int highIdx)
+{
+	int pivot;
+    
+	if(lowIdx < highIdx)
+	{
+		
+		pivot = partition(list, lowIdx, highIdx);
+        
+		quickRecurs (list, lowIdx, pivot -1);
+        
+		quickRecurs (list, pivot + 1, highIdx);
+	}
+	
+	
+}//end quickRecurs function
+int partition(int list[],int low, int high)
+{
+    
+	int pivot = low,
+    left = low + 1,
+    nbrSwap = 0,
+    right = high;
+    
+    
+    while(list[left] < list[pivot])
+    {
+        left++;
+    }
+    
+    while(list[right] > list[pivot])
+    {
+        right--;
+    }
+    
+    if(left < right)
+    {
+        
+        nbrSwap = list[left];
+        list[left] = list[right];
+        list[right] = nbrSwap;
+        
+    }
+        
+
+	
+	nbrSwap = list[right];
+	list[right] = list[pivot];
+	list[pivot] = nbrSwap;
+	
+	
+	return right;
+}

@@ -12,3 +12,5 @@ void getInput(char &firstSort, char &secondSort, int &repeat);
 
 int bubbleSort(int list[]);
 int quickSort(int list[]);
+int partition(int list[],int low, int high);
+void quickRecurs(int list[], int lowIdx, int highIdx);

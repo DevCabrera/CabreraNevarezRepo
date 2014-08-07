@@ -11,7 +11,7 @@
 // number of sorting functions
 const int NUM_SORT_FUNCS = 4;
 // max size of unsorted list of integers
-const int LIST_SIZE = 10;
+const int LIST_SIZE = 100000;
 // max value of random integer to insert into hash table
 const int MAX_INTEGER = 30000;
 // error code that will exit the program

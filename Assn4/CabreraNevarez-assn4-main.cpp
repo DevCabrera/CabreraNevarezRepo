@@ -8,7 +8,8 @@
 
 #include <iostream>
 #include <iomanip>
-
+#include <ctime>
+#include <fstream>
 #include "Cabrera-assn4-funcs.h"
 #include "CabreraNevarez-assn4-common.h"
 #include "Nevarez-assn4-funcs.h"
@@ -43,8 +44,6 @@ int main()
     displayMenu();
     getInput(firstSort, secondSort, sortsCount);
     
-    cout << getFuncTypeIndex(firstSort)<<endl;
-    cout << getFuncTypeIndex(secondSort)<<endl;
     
     // loop while user doesn't choose EE to exit
     while (firstSort != 'E')
@@ -70,6 +69,7 @@ int main()
             funcPtr = funcPtrArray[getFuncTypeIndex(secondSort)];
             secondResults[resultsIdx] = funcPtr(list2);
             
+
             // verify that lists are sorted, if not exit the program
             if (!validateSort(list1) && !validateSort(list2)) {
                 cout << "Lists are not sorted! Exiting program ...\n\n";
@@ -80,13 +80,12 @@ int main()
             resultsIdx++;
             cout << "Sorts Validated\n";
         }while (sortsCount > 0);
-        
 
         //displayAverages(list1, list2);
         
         // de-allocate the memory of the results arrays
-        delete firstResults;
-        delete secondResults;
+        delete []firstResults;
+        delete []secondResults;
         
         // display menu options again
         displayMenu();
