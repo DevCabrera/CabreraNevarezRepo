@@ -3,12 +3,12 @@
 // DESCRIPTION:		This file contains the ADT function definitions for assn 3
 // CLASS/TERM:		CS372 14M8W2
 // DESIGNER:		Juan Nevarez
-// FUNCTIONS:		
+// FUNCTIONS:
 //******************************************************************************
 
 #include <iostream>
-#include <iomanip>
 #include <ctime>
+#include <iomanip>
 #include <cstdlib>
 #include "Nevarez-assn4-funcs.h"
 #include "CabreraNevarez-assn4-common.h"
@@ -16,34 +16,27 @@
 using namespace std;
 
 //**************************************************************************
-// FUNCTION: CreateUnsortedList
+// FUNCTION: createUnsortedList
 // DESCRIPTION: creates an array of 5000 unsorted unique numbers
-// OUTPUT: Parameter: unsortedList - list of random unique numbers 
-// IMPLEMENTED BY: Juan Navarez
+// OUTPUT: Parameter: List1 - list of random numbers
+//                  : List2 - list of random numbers
+// IMPLEMENTED BY: Juan Nevarez
 //**************************************************************************
-void CreateUnsortedList (int unsortedList1[], int unsortedList2[])    
-{   
-	int num,	 			// variable to store the number in
-               
-	srand( (unsigned)time(NULL) );      // seed random number generator
-   
-	for (int idx = 0; idx < LIST_SIZE; idx++)	  // Create list
-	{
+void createUnsortedList(int list1[], int list2[])
+{
+	srand(time(0));
     
-		num = (rand() % MAX_INTEGER) + 1; //generates random number between 1 and MAX_NUM
-   
-       
-		unsortedList1[idx] = num;	//store the num value into the array
-        unsortedList2[idx] = num;      
-
-	}//ends for loop
-	
-}
+	for(int idx = 0; idx < LIST_SIZE; idx++)
+	{
+		list1[idx] = list2[idx] = (rand() % MAX_INTEGER) + 1;
+        
+	}
+}//end cretaeUnsorteList func
 //**************************************************************************
 // FUNCTION: displayMenu
-// DESCRIPTION: 
-// OUTPUT: Parameter: 
-// IMPLEMENTED BY: Juan Navarez
+// DESCRIPTION:
+// OUTPUT: Parameter:
+// IMPLEMENTED BY: Juan Nevarez
 //**************************************************************************
 void displayMenu()
 {
@@ -56,9 +49,9 @@ void displayMenu()
 }
 //**************************************************************************
 // FUNCTION: getInput
-// DESCRIPTION: 
-// OUTPUT: 
-// IMPLEMENTED BY: Juan Navarez
+// DESCRIPTION:
+// OUTPUT:
+// IMPLEMENTED BY: Juan Nevarez
 //**************************************************************************
 void getInput(char &firstSort, char &secondSort, int &repeat)
 {
@@ -70,97 +63,146 @@ void getInput(char &firstSort, char &secondSort, int &repeat)
 	firstSort = toupper(firstSort);
 	
 	secondSort = toupper(secondSort);
-
+    
 	cout << endl << endl;
-
+    
 	if(firstSort != 'E')
 	{
 		do{
-		
+            
 			cout << "Enter the number of times to repeat each sort (1 or more): ";
-			cin >> repeat; 
+			cin >> repeat;
 			if(repeat < 1)
-			 cout << "The sort minium is 1 " << endl;		
-		
+                cout << "The sort minium is 1 " << endl;
+            
 		}while(repeat < 1);
 		
 	}
 	else
 	{
 		repeat = -1;
-	}	
+	}
 	
 }
-
-int bubbleSort(int list[]){return 0;}
-
-
-int quickSort(int list[])
+//**************************************************************************
+// FUNCTION: bubbleSort
+// DESCRIPTION:
+// OUTPUT:
+// IMPLEMENTED BY: Juan Nevarez
+//**************************************************************************
+int bubbleSort(int list[])
 {
 	int startTime,
-    elapsedTime,
     endTime;
+    
+	int	elapsedTime,
+    swap;
+    
 	
-	startTime = clock()	;
+	startTime = clock();
 	
-	quickRecurs (list, 0, LIST_SIZE-1);
+	for(int iteration = 1; iteration < LIST_SIZE; iteration ++)
+	{
+		for(int index = 0; index < LIST_SIZE-iteration; index++)
+		{
+			if(list[index] > list[index + 1])
+			{
+				swap = list[index];
+				list[index] = list[index + 1];
+				list[index + 1] = swap;
+			}//ends if statement
+            
+		}//end inner loop
+        
+	}//end first for loop
 	
 	endTime = clock();
 	
 	elapsedTime = endTime - startTime;
+    
+	cout << setw(19) << right << sortsStr[BUBBLE] << " time " << elapsedTime << endl;
+	
+	return  elapsedTime;
+    
+}//ends void
+//**************************************************************************
+// FUNCTION: quickSort
+// DESCRIPTION:
+// OUTPUT:
+// IMPLEMENTED BY: Juan Nevarez
+//**************************************************************************
+int quickSort(int list[])
+{
+	int endTime,
+    startTime,
+    elapsedTime;
+    
+	startTime = clock();
+    
+	quickRecurs(list, 0, LIST_SIZE -1);
+    
+	endTime = clock();
+	
+	elapsedTime = endTime - startTime;
+    
+	cout << setw(19) << right << sortsStr[QUICK] << " time " << elapsedTime << endl;
 	
 	return elapsedTime;
-}
-void quickRecurs(int list[], int lowIdx, int highIdx)
+    
+}//end quickSort
+//**************************************************************************
+// FUNCTION: quickRecurs
+// DESCRIPTION:
+// OUTPUT:
+// IMPLEMENTED BY: Juan Nevarez
+//**************************************************************************
+void quickRecurs(int list[],int lowIdx, int highIdx)
 {
 	int pivot;
     
-	if(lowIdx < highIdx)
+	if(lowIdx < highIdx)//base case is lowIdx >= highIdx
 	{
-		
 		pivot = partition(list, lowIdx, highIdx);
-        
-		quickRecurs (list, lowIdx, pivot -1);
-        
-		quickRecurs (list, pivot + 1, highIdx);
+		
+		quickRecurs(list, lowIdx, pivot - 1);
+		
+		quickRecurs(list, pivot + 1, highIdx);
 	}
-	
-	
-}//end quickRecurs function
-int partition(int list[],int low, int high)
+}//end quickRecurs func
+//**************************************************************************
+// FUNCTION: partition
+// DESCRIPTION:
+// OUTPUT:
+// IMPLEMENTED BY: Juan Nevarez
+//**************************************************************************
+int partition(int list[],int low, int  high)
 {
-    
-	int pivot = low,
+    int pivot = low,
     left = low + 1,
-    nbrSwap = 0,
-    right = high;
+    right = high,
+    nbrSwap = 0;
     
-    
-    while(list[left] < list[pivot])
+    while(left < right)
     {
-        left++;
-    }
+        while(list[left] <= list[pivot] && left < right)
+        {
+            left++;
+        }
+        while(list[right] > list[pivot])
+        {
+            right--;
+        }
+        if(left < right)
+        {
+            nbrSwap = list[left];//variable to store number from left for the swap
+            list[left] = list[right];//moves right into left index
+            list[right] = nbrSwap;//stores number in swap to right
+        }
+    }    
+    nbrSwap = list[right];
+    list[right] = list[pivot];
+    list[pivot] = nbrSwap;
     
-    while(list[right] > list[pivot])
-    {
-        right--;
-    }
+    return right;
     
-    if(left < right)
-    {
-        
-        nbrSwap = list[left];
-        list[left] = list[right];
-        list[right] = nbrSwap;
-        
-    }
-        
-
-	
-	nbrSwap = list[right];
-	list[right] = list[pivot];
-	list[pivot] = nbrSwap;
-	
-	
-	return right;
-}
+}//end partition funcs

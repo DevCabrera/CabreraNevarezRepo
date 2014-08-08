@@ -1,9 +1,19 @@
 /**********************************************************************
  FILENAME:      CabreraNevarez-Assn4-main.cpp
- DESCRIPTION:   TODO
+ DESCRIPTION:   This program takes 100,000 unsorted numbers and sorts 
+                them using the bubble, insertion, merge, and quick sort
+                algorithms. It displays the total clock times it took
+                for each sort.
  CLASS/TERM:    CS372 / Summer 2nd term
  DESIGNERS:     Garry Cabrera and Juan Nevarez
- FUNCTIONS:     TODO
+ FUNCTIONS:     displayMenu - displays the option menu
+                getInput - obtains the user choice of which sort 
+                algorithm to use and how many times to repeat
+                getFunctionTypeIndex - returns the index of sort to be
+                used
+                createUnsortedList - returns an array of unsorted numbers
+                validateSort - determines if an array is sorted
+                getAvg - returns the average clock clicks from a sort
  **********************************************************************/
 
 #include <iostream>
@@ -25,6 +35,13 @@ const funcPtrType funcPtrArray[NUM_SORT_FUNCS] = {
     &quickSort
 };
 
+/**********************************************************************
+ FILENAME:      CabreraNevarez-Assn4-main.cpp
+ DESCRIPTION:   Controls the overall execution of the program
+ CALLS TO:      displayMenu, getInput, getFuncTypeIndex, 
+                createUnsortedList, validateSort, getAvg
+ IMPLEMENTED BY:Garry Cabrera
+ **********************************************************************/
 int main()
 {
     funcPtrType funcPtr;                // pointer to sort function chosen by user
@@ -64,7 +81,7 @@ int main()
         // loop number of reps and while list are correctly sorted
         do
         {
-            CreateUnsortedList(list1, list2);
+            createUnsortedList(list1, list2);
             
             cout << "\nStarting sort #" << resultsIdx + 1 << "...\n";
             // call first sort function

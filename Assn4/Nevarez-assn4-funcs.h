@@ -5,7 +5,7 @@
 // DESIGNER:		Juan Nevarez	
 //******************************************************************************
 
-void CreateUnsortedList (int unsortedList1[], int unsortedList2[]);
+void createUnsortedList (int unsortedList1[], int unsortedList2[]);
 void displayMenu();
 void getInput(char &firstSort, char &secondSort, int &repeat);
 
