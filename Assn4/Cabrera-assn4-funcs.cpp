@@ -52,9 +52,7 @@ int insertionSort (int list[])
     endTime = clock();
     
     elapsedTime = endTime - startTime;
-    
-    cout << setw(19) << right << sortsStr[INSERTION] << " time " << elapsedTime << endl;
-    
+        
     return elapsedTime;
 }// end insertionSort
 
@@ -110,8 +108,6 @@ int mergeSort (int list[])
 
     elapsedTime = endTime -startTime;
     
-    cout << setw(19) << right << sortsStr[MERGE] << " time " << elapsedTime << endl;
-
     return elapsedTime;
 }// end mergeSort
 

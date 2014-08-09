@@ -87,10 +87,16 @@ int main()
             // call first sort function
             funcPtr = funcPtrArray[firstSortType];
             firstResults[resultsIdx] = funcPtr(list1);
+            
+            cout << setw(19) << right << sortsStr[firstSortType] << " time "
+                 << firstResults[resultsIdx] << endl;
 
             // call second sort function
             funcPtr = funcPtrArray[secondSortType];
             secondResults[resultsIdx] = funcPtr(list2);
+            
+            cout << setw(19) << right << sortsStr[secondSortType] << " time "
+            << secondResults[resultsIdx] << endl;
             
             // verify that lists are sorted, if not exit the program
             if (!validateSort(list1) && !validateSort(list2)) {

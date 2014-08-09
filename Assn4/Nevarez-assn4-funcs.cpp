@@ -120,7 +120,6 @@ int bubbleSort(int list[])
 	
 	elapsedTime = endTime - startTime;
     
-	cout << setw(19) << right << sortsStr[BUBBLE] << " time " << elapsedTime << endl;
 	
 	return  elapsedTime;
     
@@ -144,9 +143,7 @@ int quickSort(int list[])
 	endTime = clock();
 	
 	elapsedTime = endTime - startTime;
-    
-	cout << setw(19) << right << sortsStr[QUICK] << " time " << elapsedTime << endl;
-	
+    	
 	return elapsedTime;
     
 }//end quickSort
